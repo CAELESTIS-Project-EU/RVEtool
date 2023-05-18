@@ -1,4 +1,4 @@
-def writeAlyaSld(file,filename,kfl_timei,kfl_coh,nmate):
+def writeAlyaSld(file, filename, kfl_timei, kfl_coh, nmate, iload):
     """ Alya caseName.sld.dat file
     """
     
@@ -112,41 +112,58 @@ def writeAlyaSld(file,filename,kfl_timei,kfl_coh,nmate):
     stream.write('  POSTPROCESS DAMAG\n')
     stream.write('  POSTPROCESS DCOHE\n')
     stream.write('  ELEMENT_SET\n')
-    stream.write('    EPSXX\n')
-    stream.write('    EPSYY\n')
-    stream.write('    EPSZZ\n')
-    stream.write('    EPSYZ\n')
-    stream.write('    EPSXZ\n')
-    stream.write('    EPSXY\n')
-    stream.write('    SIGXX\n')
-    stream.write('    SIGYY\n')
-    stream.write('    SIGZZ\n')
-    stream.write('    SIGXZ\n')
-    stream.write('    SIGYZ\n')
-    stream.write('    SIGXY\n')
+    if iload == '11':
+        # Longitudinal tension
+        stream.write('    EPSZZ\n')
+        stream.write('    SIGZZ\n')
+    elif iload == '22':
+        # Transverse tension
+        stream.write('    EPSYY\n')
+        stream.write('    SIGYY\n')
+    elif iload == '12':
+        # In-plane shear
+        stream.write('    EPSXZ\n')
+        stream.write('    SIGXZ\n')
+    elif iload == '23':
+        # Transverse shear
+        stream.write('    EPSYZ\n')
+        stream.write('    SIGYZ\n')
     stream.write('  END_ELEMENT_SET\n')
     stream.write('END_OUTPUT_&_POST_PROCESS\n')
     stream.write('$-------------------------------------------------------------------\n')
     stream.write('BOUNDARY_CONDITIONS, TRANSIENT\n')
     stream.write('  CODES, NODES\n')
-    stream.write('            6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('        1 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('        2 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('        3 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('        4 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('    1 & 3 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('    2 & 3 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('    2 & 4 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('    1 & 4 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
-    stream.write('            5 001 0.0 0.0 0.0 \n')
-    stream.write('        1 & 5 001 0.0 0.0 0.0 \n')
-    stream.write('        2 & 5 001 0.0 0.0 0.0 \n')
-    stream.write('        3 & 5 001 0.0 0.0 0.0 \n')
-    stream.write('        4 & 5 001 0.0 0.0 0.0 \n')
-    stream.write('    1 & 3 & 5 001 0.0 0.0 0.0 \n')
-    stream.write('    1 & 4 & 5 001 0.0 0.0 0.0 \n')
-    stream.write('    2 & 3 & 5 001 0.0 0.0 0.0 \n')
-    stream.write('    2 & 4 & 5 001 0.0 0.0 0.0 \n')
+    if iload == '11':
+        # Longitudinal tension
+        stream.write('            6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('        1 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('        2 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('        3 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('        4 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('    1 & 3 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('    2 & 3 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('    2 & 4 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('    1 & 4 & 6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        stream.write('            5 001 0.0 0.0 0.0 \n')
+        stream.write('        1 & 5 001 0.0 0.0 0.0 \n')
+        stream.write('        2 & 5 001 0.0 0.0 0.0 \n')
+        stream.write('        3 & 5 001 0.0 0.0 0.0 \n')
+        stream.write('        4 & 5 001 0.0 0.0 0.0 \n')
+        stream.write('    1 & 3 & 5 001 0.0 0.0 0.0 \n')
+        stream.write('    1 & 4 & 5 001 0.0 0.0 0.0 \n')
+        stream.write('    2 & 3 & 5 001 0.0 0.0 0.0 \n')
+        stream.write('    2 & 4 & 5 001 0.0 0.0 0.0 \n')
+    elif iload == '22':
+        # Transverse tension
+        stream.write('            6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+        
+    elif iload == '12':
+        # In-plane shear
+        stream.write('            6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
+         
+    elif iload == '23':
+        # Transverse shear
+        stream.write('            6 001 0.0 0.0 1.0, DISCRETE_FUNCTIONS= U_FUNC \n')
     stream.write('  END_CODES\n')
     stream.write('END_BOUNDARY_CONDITIONS\n')
     stream.write('$-------------------------------------------------------------------\n')

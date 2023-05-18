@@ -1,4 +1,4 @@
-def writeAlyaDat(file,filename ):
+def writeAlyaDat(file, filename):
     """ Alya caseName.dat file
     """
     
