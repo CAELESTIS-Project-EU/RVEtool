@@ -27,7 +27,7 @@ else:
     def verbosityPrint(str):
         pass
 
-def run(file, meshPath, outputPath, iload):
+def run(file, meshPath, outputPath, iload, debug):
     """
     Alya writer files
     """
@@ -35,9 +35,10 @@ def run(file, meshPath, outputPath, iload):
     verbosityPrint('Writing Alya configuration files...')
     
     dash_iload = '-'+iload    
-    writeAlyaDat(f'{outputPath}{file}{dash_iload}.dat',file)
-    writeAlyaKer(f'{outputPath}{file}{dash_iload}.ker.dat')
-    writeAlyaPos(f'{outputPath}{file}{dash_iload}.post.alyadat')
+    writeAlyaDat(f'{outputPath}{file}{dash_iload}.dat', file, dash_iload, debug)
+    writeAlyaKer(f'{outputPath}{file}{dash_iload}.ker.dat', iload, debug)
+    if debug:
+        writeAlyaPos(f'{outputPath}{file}{dash_iload}.post.alyadat')
     
     nOfMaterials = readAlyaMat(f'{meshPath}{file}.mat.dat')
 
@@ -48,7 +49,7 @@ def run(file, meshPath, outputPath, iload):
     dim = 3
     writeAlyaDom(f'{outputPath}{file}{dash_iload}.dom.dat', file, dim, nOfMaterials, kfl_coh)
     
-    writeAlyaSld(f'{outputPath}{file}{dash_iload}.sld.dat', file, 'STATIC', kfl_coh, nOfMaterials, iload)
+    writeAlyaSld(f'{outputPath}{file}{dash_iload}.sld.dat', file, dash_iload, 'STATIC', kfl_coh, nOfMaterials, iload, debug)
     
 if __name__ == '__main__':
 
@@ -56,13 +57,16 @@ if __name__ == '__main__':
     st = time.time()
 
     #-------------------------------------------------------------------
-        
+    # User inputs
+    #-------------------------------------------------------------------
+
+    debug = True
     #case = 'RVE_10_10_1'
     #case = 'RVE_Test_1'
     #case = 'twoFibres'
     #case = 'oneFibre'
     case = 'RVE_1x1_with_voids_1'
-    listloads = ['11','22'] # 11, 22, 12, 23 or all
+    listloads = ['11', '22', '12', '23']
 
     #-------------------------------------------------------------------
 
@@ -78,7 +82,7 @@ if __name__ == '__main__':
             os.makedirs(outputPath)
             
         # Run Alya writer
-        run(case, meshPath, outputPath, iload)
+        run(case, meshPath, outputPath, iload, debug)
 
     # Get the end time
     et = time.time()
