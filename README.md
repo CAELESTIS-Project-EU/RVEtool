@@ -97,6 +97,11 @@ The directory tree for the output folder is the following:
 └── README.md The main readme\
 ```
 
+## License
+Not defined yet.
+
+
 ## Support
-:envelope: Gerard Guillamet <gerard.guillamet@bsc.es>
-:envelope: Eloi Ruiz-Girones <eloi.ruizgirones@bsc.es>
+:envelope: Gerard Guillamet: <gerard.guillamet@bsc.es>
+
+:envelope: Eloi Ruiz-Gironés: <eloi.ruizgirones@bsc.es>
