@@ -46,10 +46,10 @@ export PATH=`gmsh_path:$PATH
 ```
 
 ## Usage
-Each folder contains a `main.py` file with the corresponding user inputs.
+Each folder contains a `main.py` file with the corresponding user inputs. Right now the user has to run the `main.py` for each `RVE_xxx` module.
 
 ## Output models
-The different models here referred as `jobName` cases are stored in the `output` folder which is created automatically. The user can define the number of subcases (load case scenarios) for each RVE. The available load cases are the following:
+The RVE model generated here referred to as `jobName` is stored in the `output` folder. This folder is generated automatically if no exists. The user can define the number of load case scenarios for the RVE `jobName`. The available load cases are the following:
 - Longitudinal tension (11 component)
 - Transverse tension (22 componenent)
 - In-plane shear (12 component)
