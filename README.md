@@ -15,13 +15,13 @@ RVEtool is a modeling package with different tools for meshing and run FEA of mi
 `RVE_gen` main features:
 - Only `.npz` files are supported.
 
-`RVE_mesher` main features:
-- 3-d mesh with hexahedron elements.
+`RVE_mesher` main features (Gmsh):
+- 3-d mesh with linear hexahedron elements.
 - Generation of the full Periodic Boundary Conditions (PBCs) based on master-slave nodes (Garoz et al. 2019).
-- Coordinates correction at boundary nodes for a correct application of PBCs.
+- Coordinates correction at boundary nodes used for PBCs.
 - Option to generate zero-thickness cohesive elements between fibers and the matrix.
 
-`RVE_solver` main features:
+`RVE_solver` main features (Alya multiphysics):
 - Sequential (`ASCII`) format or parallel I/O (`MPIO`).
 - Parallel mesh partitioning.
 - Iterative solvers for symmetric and unsymmetric matrices.
@@ -49,11 +49,11 @@ export PATH=`gmsh_path:$PATH
 Each folder contains a `main.py` file with the corresponding user inputs. Right now the user has to run the `main.py` for each `RVE_xxx` module.
 
 ## Output models
-The RVE model generated here referred to as `jobName` is stored in the `output` folder. This folder is generated automatically if no exists. The user can define the number of load case scenarios for the RVE `jobName`. The available load cases are the following:
+The RVE model generated here referred to as `jobName` is stored in the `output` folder. This folder is generated automatically if no exists. The user can define the number of load case scenarios for the RVE `jobName`. The current load cases are derived from transversally isotropic materials and they are the following:
 - Longitudinal tension (11 component)
 - Transverse tension (22 componenent)
 - In-plane shear (12 component)
-- Transverse shear (23 compomnent)
+- Out-of-plane shear (23 compomnent)
 
 The directory tree for the output folder is the following:
 ```bash
@@ -87,7 +87,7 @@ The directory tree for the output folder is the following:
 │   │   │   ├── jobName-12.dom.dat
 │   │   │   ├── jobName-12.sld.dat
 │   │   │   └── jobName-12.post.alyadat 
-│   │   └── jobName-23\ is the transverse shear case
+│   │   └── jobName-23\ is the out-of-plane shear case
 │   │       ├── jobName-23.dat
 │   │       ├── jobName-23.ker.dat
 │   │       ├── jobName-23.dom.dat
@@ -96,3 +96,7 @@ The directory tree for the output folder is the following:
 │   └── ...
 └── README.md The main readme\
 ```
+
+## Support
+:envelope: Gerard Guillamet <gerard.guillamet@bsc.es>
+:envelope: Eloi Ruiz-Girones <eloi.ruizgirones@bsc.es>
