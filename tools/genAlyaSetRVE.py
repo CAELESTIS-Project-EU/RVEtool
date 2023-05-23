@@ -14,7 +14,11 @@ def writeAlyaSetDat(source,ne):
     Write Alya Set file
     """
     # Check the existance of interface elements
-    kfl_coh, cha_array = readAlyaChaDat(source+'.cha.dat')
+    try:
+        kfl_coh, cha_array = readAlyaChaDat(source+'.cha.dat')
+    except:
+        kfl_coh = False
+        cha_array = numpy.zeros(len(ne))
     # Write Alya set file with only bulk elements
     fo = open(source+".set.dat","w")
     fo.write("ELEMENTS\n")
