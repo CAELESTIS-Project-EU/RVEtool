@@ -97,6 +97,13 @@ The directory tree for the output folder is the following:
 └── README.md The main readme\
 ```
 
+## Benchmarking
+
+|Framework      |`RVE_gen`|`RVE_mesher`|`RVE_solver`|Total time| 
+|---------------|---------|------------|------------|----------|
+| Abaqus        |         |            |            |          | 
+| Gmsh and Alya |         |            |            |          |
+
 ## License
 Not defined yet.
 
