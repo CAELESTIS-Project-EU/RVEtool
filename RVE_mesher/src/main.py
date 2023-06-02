@@ -58,7 +58,11 @@ def runMesher(file, dataPath, outputPath, h, c, nOfLevels, generateCohesiveEleme
     gmshMesher(RVE, h, scriptFile, mshFile)
 
     verbosityPrint('Running gmsh...')
-    os.system(f'gmsh {scriptFile} -v 0 -')
+    #GmshBinFile = '../../build/RVE_mesher/gmsh/src/gmsh-build/gmsh'
+    #GmshBinFile = '../../../build/gmsh'
+    #GmshBinFile = '/Users/gguillam/BSC/rvetool/main/build/_deps/gmsh-build/gmsh'
+    GmshBinFile = 'gmsh'
+    os.system(f'{GmshBinFile} {scriptFile} -v 0 -')
 
     verbosityPrint('Reading mesh file...')
     x_id, T_ei, T_fi = readMesh(mshFile)
