@@ -1,4 +1,5 @@
 
+import os
 import numpy
 
 """
@@ -10,17 +11,47 @@ def loadAlyaGeoDat(source):
     Load coordinates and element connectivity files 
     Skip first and last rows
     """
-    na = numpy.loadtxt(open(f'{source}'+'.nod.dat').readlines()[:-1], skiprows=1, dtype=None)
-    ne = []
-    with open(f'{source}'+'.ele.dat','r') as fcon:
-        for line in fcon:
-            if line.split()[0] == 'ELEMENTS':
-                continue
-            elif line.split()[0] == 'END_ELEMENTS':
-                continue
-            else:
-                iline = numpy.array([int(i) for i in line.split()])
-                ne.append(iline)
+    # Alya coordinates list
+    possible_extensions = ['.nod.dat', '.coo.dat', '.coor.dat']
+    fileName = None
+    for extension in possible_extensions:
+        file_path = f"{source}{extension}"
+        if os.path.isfile(file_path):
+            fileName = file_path
+            break
+    if fileName:
+        try:
+            na = numpy.loadtxt(open(fileName).readlines()[:-1], skiprows=1, dtype=None)
+        except FileNotFoundError:
+            print('FileNotFoundError')
+    else:
+        print("No valid file found.")
+            
+    # Alya element connectivity list
+    possible_extensions = ['.ele.dat', '.con.dat']
+    fileName = None
+    for extension in possible_extensions:
+        file_path = f"{source}{extension}"
+        if os.path.isfile(file_path):
+            fileName = file_path
+            break
+    if fileName:
+        try:
+            ne = []
+            with open(fileName,'r') as fcon:
+                for line in fcon:
+                    if line.split()[0] == 'ELEMENTS':
+                        continue
+                    elif line.split()[0] == 'END_ELEMENTS':
+                        continue
+                    else:
+                        iline = numpy.array([int(i) for i in line.split()])
+                        ne.append(iline)
+        except FileNotFoundError:
+            print('FileNotFoundError')
+    else:
+        print("No valid file found.")
+        
     return ne, na
 
 def getRVEdimensionsAndCentering(na):
