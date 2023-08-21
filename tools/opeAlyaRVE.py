@@ -180,7 +180,7 @@ def getRVEnodesFromVertices(lx,ly,lz,na,n):
 
     return n1,n2,n3,n4,n5,n6,n7,n8
 
-def getRVEnodesFromEdges(lx,ly,lz,n,na):
+def getRVEnodesFromEdges(lx,ly,lz,n,na,n1,n2,n3,n4,n5,n6,n7,n8):
     """
     Get nodes RVE from edges
     """
@@ -300,12 +300,11 @@ def addNodesFromEdges(e1,e2,e3,e4,e5,e6,e7,e8,e9,e10,e11,e12,x,y,z,tol,lmast):
                 lmast.append([i,j])
     return lmast
 
-def addNodesFromFaces(x,y,z,x0,y0,z0,bound_xl,bound_yl,bound_zl,tol,lmast):
+def addNodesFromFaces(x,y,z,x0,y0,z0,xl,yl,zl,bound_xl,bound_yl,bound_zl,tol,lmast):
     """
     Add nodes from faces
     """
-    # Append faces
-    # Faces 1-3
+    # Faces BCGF (Slave) - ADHE (Master)
     for i in xl:
         if i not in bound_xl:
             for j in x0:
@@ -313,7 +312,7 @@ def addNodesFromFaces(x,y,z,x0,y0,z0,bound_xl,bound_yl,bound_zl,tol,lmast):
                 zdif = abs(z[i-1]-z[j-1])
                 if( (ydif <= tol) and (zdif <= tol) ):
                     lmast.append([i,j])
-    # Faces 2-4
+    # Faces DHGC (Slave) - AEFB (Master)
     for i in yl:
         if i not in bound_yl:
             for j in y0:
@@ -321,7 +320,7 @@ def addNodesFromFaces(x,y,z,x0,y0,z0,bound_xl,bound_yl,bound_zl,tol,lmast):
                 zdif = abs(z[i-1]-z[j-1])
                 if( (xdif <= tol) and (zdif <= tol) ):
                     lmast.append([i,j])
-    # Face 6-5
+    # Faces EFGH (Slave) - ABCD (Master)
     for i in zl:
         if i not in bound_zl:
             for j in z0:
@@ -331,7 +330,7 @@ def addNodesFromFaces(x,y,z,x0,y0,z0,bound_xl,bound_yl,bound_zl,tol,lmast):
                     lmast.append([i,j])
     return lmast
 
-def addNodesFromFacesMeso(flowDirection,x,y,z,x0,y0,z0,bound_xl,bound_yl,bound_zl,tol,lmast):
+def addNodesFromFacesMeso(flowDirection,x,y,z,x0,y0,z0,xl,yl,zl,bound_xl,bound_yl,bound_zl,tol,lmast):
     """
     Add nodes from faces
     """

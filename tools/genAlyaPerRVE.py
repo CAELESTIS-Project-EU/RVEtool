@@ -59,7 +59,7 @@ if __name__ == '__main__':
     n1, n2, n3, n4, n5, n6, n7, n8 = getRVEnodesFromVertices(lx,ly,lz,na,n)
 
     # Get nodes from edges
-    e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12 = getRVEnodesFromEdges(lx,ly,lz,n,na)
+    e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12 = getRVEnodesFromEdges(lx,ly,lz,n,na,n1,n2,n3,n4,n5,n6,n7,n8)
 
     bound_xl = e1  + e2  + e5  + e6  + [n1] + [n2] + [n3] + [n4]
     bound_yl = e2  + e3  + e10 + e11 + [n2] + [n3] + [n6] + [n7]
@@ -75,9 +75,9 @@ if __name__ == '__main__':
 
     print('Adding nodes from faces ...')
     if typeRVE == 'micro':
-        lmast = addNodesFromFaces(x,y,z,x0,y0,z0,bound_xl,bound_yl,bound_zl,tol,lmast)
+        lmast = addNodesFromFaces(x,y,z,x0,y0,z0,xl,yl,zl,bound_xl,bound_yl,bound_zl,tol,lmast)
     else:
-        lmast = addNodesFromFacesMeso(flowDirection,x,y,z,x0,y0,z0,bound_xl,bound_yl,bound_zl,tol,lmast)
+        lmast = addNodesFromFacesMeso(flowDirection,x,y,z,x0,y0,z0,xl,yl,zl,bound_xl,bound_yl,bound_zl,tol,lmast)
         
     print('Faces added!')
     print('No. nodes:',len(lmast))
