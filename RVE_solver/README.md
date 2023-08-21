@@ -30,6 +30,7 @@ CODE 1: LEFT,  X= 0
 CODE 2: RIGHT, X= 1
 CODE 3: BOT,   Y= 0
 CODE 4: TOP,   Y= 1
+
 CODE 5: BACK,  Z= 0 (only for 3-d)
 CODE 6: FRONT, Z= 1 (only for 3-d)
 
@@ -57,8 +58,14 @@ The periodic boundary conditions are based on [Garoz et al. 2018](https://doi.or
     \
     _\/ z
 
-
-      Faces           Edges         Vertices
+     Edges          Vertices\n')
+  ------------------------------------------------\n')
+  Slave Master    Slave Master\n')
+    DC    AB         B     A\n')
+    BC    AD         C     A\n')
+                     D     A\n')
+                     
+     Faces           Edges          Vertices
   ------------------------------------------------ 
   Slave Master    Slave Master    Slave Master
    BCGF  ADHE      EF    AB         B     A
