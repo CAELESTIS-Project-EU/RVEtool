@@ -1,4 +1,5 @@
 import pathlib
+
 path = pathlib.Path(__file__).parent.resolve()
 
 import sys
@@ -69,8 +70,10 @@ if __name__ == '__main__':
     # Set paths for binaries
     gmshBinFile = 'gmsh'
     #gmshBinFile = '/gpfs/projects/bsce81/gmsh/gmsh-4.11.1-Linux64/bin/gmsh'
+    gmsh2alya = 'gmsh2alya.pl'
+    # gmshBinFile = '/gpfs/projects/bsce81/alya/builds/gmsh2alya.pl'
     
     # Run mesher
-    mesher3D(case, gmshBinFile, dataPath, outputPath, h, c, nOfLevels, generateCohesiveElements)
+    mesher3D(case, gmshBinFile, gmsh2alya, dataPath, outputPath, h, c, nOfLevels, generateCohesiveElements)
 
 
