@@ -14,7 +14,7 @@ RVEtoolDefects is a high-performance modeling package that integrates various to
 
 For synthetic data generation the RVEtoolDefects can be orchestrated by [PyCOMPSs](https://pypi.org/project/pycompss/) parallel framework. The use of PyCOMPSs allow to perform large-scale Design of Experiments (DoE) when is executed in HPC environments.
 
-## RVEtoolDefects modules
+## RVEtool modules
 
 RVEtoolDefects has three main modules for the finite element model generation:
 
