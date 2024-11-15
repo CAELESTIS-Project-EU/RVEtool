@@ -7,7 +7,7 @@
 
 ## Description
 
-RVEtoolDefects is a high-performance modeling package that integrates various tools for meshing and performing finite element analysis (FEA) on micromechanical models of fiber-reinforced materials, including the presence of defects (voids). Its primary finite element solver for high-fidelity structural mechanics simulations is [Alya multiphysics](https://www.bsc.es/research-development/research-areas/engineering-simulations/alya-high-performance-computational), designed for large-scale, high-performance computing. Additionally, COUPONtool is optimized for generating large-scale synthetic datasets, facilitating the deployment of advanced Artificial Intelligence (AI) models and enabling Uncertainty Quantification Analysis (UQA) when used with the [PyCOMPSs](https://pypi.org/project/pycompss/) parallel computing framework.
+RVEtoolDefects is a high-performance modeling package that integrates various tools for meshing and performing finite element analysis (FEA) on micromechanical models of fiber-reinforced materials, including the presence of defects (voids). Its primary finite element solver for high-fidelity structural mechanics simulations is [Alya multiphysics](https://www.bsc.es/research-development/research-areas/engineering-simulations/alya-high-performance-computational), designed for large-scale, high-performance computing. Additionally, RVEtool is optimized for generating large-scale synthetic datasets, facilitating the deployment of advanced Artificial Intelligence (AI) models and enabling Uncertainty Quantification Analysis (UQA) when used with the [PyCOMPSs](https://pypi.org/project/pycompss/) parallel computing framework.
 
 
 ## Synthetic data generation
@@ -26,15 +26,14 @@ RVEtoolDefects has three main modules for the finite element model generation:
 - Only `.npz` files are supported.
 
 `RVE_mesher` main features (Gmsh):
-- 2-d and 3-d meshes with linear quadrilaterals/hexahedron elements.
+- 3-d meshes with linear hexahedron elements.
 - Generation of the full Periodic Boundary Conditions (PBCs) based on master-slave nodes (Garoz et al. 2019).
 - Coordinates correction at boundary nodes used for PBCs.
-- Option to generate zero-thickness cohesive elements between fibers and the matrix.
 
 `RVE_solver` main features (Alya multiphysics):
 - Sequential (`ASCII`) format or parallel I/O (`MPIO`).
-- Parallel mesh partitioning.
-- Iterative solvers for symmetric and unsymmetric matrices.
+- Option for parallel mesh partitioning.
+- Option for iterative solvers for unsymmetric matrices.
 
 ## Boundary Conditions
 
@@ -62,7 +61,7 @@ python -m pip install -r requirements.txt
 export PATH=`gmsh_path:$PATH
 ```
 *Step 3:* Update submodules
-RVEtool uses a specific RVE generator not available as opensource. Source code can be shared with permission from the owner. Submodules are updated with the following command:
+RVEtool uses a specific RVE generator by University of Girona, not available as opensource. Source code can be shared with permission from the owner. Submodules are updated with the following command:
 
 ```
 git submodule update --init --recursive
@@ -78,11 +77,6 @@ python3 RVEtool.py --exp-file=/examples/job_name.yaml
 ## Output models
 
 The RVE model generated here referred to as `jobName` is stored in the `output_path` folder. This folder is generated automatically if no exists. The user can define the number of load case scenarios for the RVE `jobName` following the material system (1-2-3) or the global system (x-y-z). The load cases available for 2D and 3D are the following:
-
-2D models:
-- Transverse tension (11 componenent)
-- Transverse tension (22 componenent)
-- In-plane shear (12 component)
 
 3D models:
 - Longitudinal tension (11 component)
@@ -138,10 +132,8 @@ rvetool\
 
 This repository makes uses of other tools which are not incluced because they are subjected to different Licences agreement:
 
-- RVE generator for UD materials including the presence of defects.
-- gmsh2alya script.
+- RVE generator for UD materials including the presence of defects by University of Girona.
+- gmsh2alya converter
 - Alya executable file.
 
 For any questions, please contact to Gerard Guillamet (gerard.guillamet@bsc.es)
-
-
